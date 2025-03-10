@@ -10,6 +10,8 @@ public class MainPanelView: MonoBehaviour
     public TMP_Text AnswerText;
 
     public TMP_InputField InputField;
+    public Image TrueImage;
+    public Image FalseImage;
 
     public Button BeackButton;
     public Button CheckButton;

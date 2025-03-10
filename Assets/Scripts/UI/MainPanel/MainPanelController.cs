@@ -23,6 +23,8 @@ public class MainPanelController
         _mainView.MainPanelView.CheckButton.onClick.AddListener(CheckTask);
         _sOData.Score = PlayerPrefs.GetInt("Score");
         _sOData.LocalScore = PlayerPrefs.GetInt("LocalScore");
+        _mainView.MainPanelView.TrueImage.gameObject.SetActive(false);
+        _mainView.MainPanelView.FalseImage.gameObject.SetActive(false);
         CreatExample();
     }
 
@@ -91,20 +93,21 @@ public class MainPanelController
     private void CheckTask()
     {
         float tempF = 0f;
-        tempF = float.Parse(AnswerStr);//tempF = float.Parse( _mainView.MainPanelView.InputField.text);
+        tempF = float.Parse(AnswerStr);
         if (tempF== _result)
         {
             AddScore();
+            SetImageTrue();
         }
         else
         {
             RemovScore();
+            SetImageFalse();
         }
         PlayerPrefs.SetInt("LocalScore", _sOData.LocalScore);
         PlayerPrefs.SetInt("Score", _sOData.Score);
         CreatExample();
         AnswerStr = "";
-        //_mainView.MainPanelView.InputField.text = "";
     }
     private void AddScore()
     {
@@ -122,5 +125,16 @@ public class MainPanelController
         {
             _mainView.MainPanelView.AnswerText.text = AnswerStr;
         }
+    }
+
+    private void SetImageTrue()
+    {
+        _mainView.MainPanelView.TrueImage.gameObject.SetActive(true);
+        _mainView.MainPanelView.FalseImage.gameObject.SetActive(false);
+    }
+    private void SetImageFalse()
+    {
+        _mainView.MainPanelView.TrueImage.gameObject.SetActive(false);
+        _mainView.MainPanelView.FalseImage.gameObject.SetActive(true);
     }
 }
