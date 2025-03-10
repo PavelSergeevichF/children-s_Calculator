@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Score: 0
   LocalScore: 0
+  str: 0
   NumSize: 1
+  ListTask: 00000000
   Subtraction: 1
   Addition: 0
   Multiplication: 0

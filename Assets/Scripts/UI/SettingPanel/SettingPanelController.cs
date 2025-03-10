@@ -20,7 +20,33 @@ public class SettingPanelController
         SetViewString();
     }
 
-    public void Execute() => GetToggle();
+    public void Execute()
+    {
+        if (_sOData.Subtraction != _mainView.SettingPanelView.SubtractionToggle.isOn)
+        {
+            _sOData.Subtraction = _mainView.SettingPanelView.SubtractionToggle.isOn;
+            if (_sOData.Subtraction){ _sOData.ListTask.Add(ActionNum.Subtraction);}
+            else  { _sOData.ListTask.Remove(ActionNum.Subtraction); }
+        }
+        if (_sOData.Addition != _mainView.SettingPanelView.AdditionToggle.isOn)
+        {
+            _sOData.Addition = _mainView.SettingPanelView.AdditionToggle.isOn;
+            if (_sOData.Addition) { _sOData.ListTask.Add(ActionNum.Addition); }
+            else { _sOData.ListTask.Remove(ActionNum.Addition); }
+        }
+        if (_sOData.Multiplication != _mainView.SettingPanelView.MultiplicationToggle.isOn)
+        {
+            _sOData.Multiplication = _mainView.SettingPanelView.MultiplicationToggle.isOn;
+            if (_sOData.Multiplication) { _sOData.ListTask.Add(ActionNum.Multiplication); }
+            else { _sOData.ListTask.Remove(ActionNum.Multiplication); }
+        }
+        if (_sOData.Division != _mainView.SettingPanelView.DivisionToggle.isOn)
+        {
+            _sOData.Division = _mainView.SettingPanelView.DivisionToggle.isOn;
+            if (_sOData.Division) { _sOData.ListTask.Add(ActionNum.Division); }
+            else { _sOData.ListTask.Remove(ActionNum.Division); }
+        }
+    }
     private void SetToggle()
     {
         _mainView.SettingPanelView.SubtractionToggle.isOn =_sOData.Subtraction ;
@@ -70,6 +96,7 @@ public class SettingPanelController
             str += "0";
         }
         _mainView.SettingPanelView.ShowNum.text = str;
+        _sOData.str = str;
     }
 
     private void ResetLocalScore()
