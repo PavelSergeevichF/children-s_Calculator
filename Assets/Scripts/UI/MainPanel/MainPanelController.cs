@@ -1,4 +1,5 @@
 
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class MainPanelController
@@ -15,6 +16,8 @@ public class MainPanelController
         _mainView = mainView;
         _sOData = mainView.SOData;
         _mainView.MainPanelView.CheckButton.onClick.AddListener(CheckTask);
+        _sOData.Score = PlayerPrefs.GetInt("Score");
+        _sOData.LocalScore = PlayerPrefs.GetInt("LocalScore");
         CreatExample();
     }
 
@@ -73,16 +76,25 @@ public class MainPanelController
         tempF = float.Parse( _mainView.MainPanelView.InputField.text);
         if (tempF== _result)
         {
-            if(!_cof) { _sOData.Score++; _sOData.LocalScore++; }
-            else { _sOData.Score +=2; _sOData.LocalScore +=2; }
-            
+            AddScore();
         }
         else
         {
-            if (!_cof) { _sOData.Score--; _sOData.LocalScore--; }
-            else { _sOData.Score -= 2; _sOData.LocalScore-=2; }
+            RemovScore();
         }
+        PlayerPrefs.SetInt("LocalScore", _sOData.LocalScore);
+        PlayerPrefs.SetInt("Score", _sOData.Score);
         CreatExample();
         _mainView.MainPanelView.InputField.text = "";
+    }
+    private void AddScore()
+    {
+        if (!_cof) { _sOData.Score++; _sOData.LocalScore++; }
+        else { _sOData.Score += 2; _sOData.LocalScore += 2; }
+    }
+    private void RemovScore()
+    {
+        if (!_cof) { _sOData.Score--; _sOData.LocalScore--; }
+        else { _sOData.Score -= 2; _sOData.LocalScore -= 2; }
     }
 }

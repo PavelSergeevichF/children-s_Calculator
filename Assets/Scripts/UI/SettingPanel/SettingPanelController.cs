@@ -96,6 +96,7 @@ public class SettingPanelController
     private void ResetLocalScore()
     {
         _sOData.LocalScore = 0;
+        PlayerPrefs.SetInt("LocalScore", 0);
     }
 
     private void ExitProgramm() => Application.Quit();
