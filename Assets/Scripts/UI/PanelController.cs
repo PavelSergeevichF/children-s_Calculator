@@ -45,6 +45,7 @@ public class PanelController : IExecute
     {
         _mainView.MainPanelView.MainPanel.SetActive(true);
         _mainView.SettingPanelView.SettingPanel.SetActive(false);
+        _mainPanelController.CreatExample();
     }
 
     public void SettingPanelActive()

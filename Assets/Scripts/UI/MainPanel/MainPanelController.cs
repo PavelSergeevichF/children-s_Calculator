@@ -11,8 +11,13 @@ public class MainPanelController
     private SOData _sOData;
     private MainView _mainView;
 
+    private ButtonPanelController _buttonPanelController;
+
+    public string AnswerStr = "";
+
     public MainPanelController(MainView mainView)
     {
+        _buttonPanelController = new ButtonPanelController(this, mainView.MainPanelView.ButtonPanelView);
         _mainView = mainView;
         _sOData = mainView.SOData;
         _mainView.MainPanelView.CheckButton.onClick.AddListener(CheckTask);
@@ -22,9 +27,11 @@ public class MainPanelController
     }
 
     public void Execute()
-    { }
+    {
+        ShoweAnswer();
+    }
 
-    private void CreatExample() 
+    public void CreatExample() 
     {
         int actionTask=Random.Range(1, _sOData.ListTask.Count);
         int min =(int) Mathf.Pow(10,(_sOData.str.Length-1));
@@ -63,9 +70,20 @@ public class MainPanelController
             break;
             case ActionNum.Division: 
                 {
+                    if(num2>100)
+                    {
+                        num2=(int)(num2/100);
+                    }
+                    float mum1f = num1;
+                    float mum2f = num2;
                     _mainView.MainPanelView.TasckText.text = $"{num1}/{num2}=";
-                    _result = num1 / num2;
+                    _result = mum1f / mum2f;
                     _cof = true;
+                    string resultStr = _result.ToString();
+                    if(resultStr.Length>6)
+                    {
+                        CreatExample();
+                    }
                 }
             break;
         }
@@ -73,7 +91,7 @@ public class MainPanelController
     private void CheckTask()
     {
         float tempF = 0f;
-        tempF = float.Parse( _mainView.MainPanelView.InputField.text);
+        tempF = float.Parse(AnswerStr);//tempF = float.Parse( _mainView.MainPanelView.InputField.text);
         if (tempF== _result)
         {
             AddScore();
@@ -85,7 +103,8 @@ public class MainPanelController
         PlayerPrefs.SetInt("LocalScore", _sOData.LocalScore);
         PlayerPrefs.SetInt("Score", _sOData.Score);
         CreatExample();
-        _mainView.MainPanelView.InputField.text = "";
+        AnswerStr = "";
+        //_mainView.MainPanelView.InputField.text = "";
     }
     private void AddScore()
     {
@@ -96,5 +115,12 @@ public class MainPanelController
     {
         if (!_cof) { _sOData.Score--; _sOData.LocalScore--; }
         else { _sOData.Score -= 2; _sOData.LocalScore -= 2; }
+    }
+    private void ShoweAnswer()
+    {
+        if (AnswerStr != _mainView.MainPanelView.AnswerText.text)
+        {
+            _mainView.MainPanelView.AnswerText.text = AnswerStr;
+        }
     }
 }
