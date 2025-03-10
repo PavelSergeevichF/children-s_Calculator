@@ -14,8 +14,9 @@ public class SettingPanelController
         mainView.SettingPanelView.NextNumButton.onClick.AddListener(AddNum);
         mainView.SettingPanelView.BeackNumButton.onClick.AddListener(ReduceNum);
         mainView.SettingPanelView.ResetButton.onClick.AddListener(ResetLocalScore);
+        mainView.SettingPanelView.ExitButton.onClick.AddListener(ExitProgramm);
 
-        _sOData= mainView.SOData;
+        _sOData = mainView.SOData;
         SetToggle();
         SetViewString();
     }
@@ -55,13 +56,6 @@ public class SettingPanelController
         _mainView.SettingPanelView.DivisionToggle.isOn = _sOData.Division;
     }
 
-    private void GetToggle()
-    {
-        _sOData.Subtraction = _mainView.SettingPanelView.SubtractionToggle.isOn;
-        _sOData.Addition  = _mainView.SettingPanelView.AdditionToggle.isOn;
-        _sOData.Multiplication = _mainView.SettingPanelView.MultiplicationToggle.isOn;
-        _sOData.Division = _mainView.SettingPanelView.DivisionToggle.isOn;
-    }
     
     private void AddNum()
     {
@@ -104,5 +98,6 @@ public class SettingPanelController
         _sOData.LocalScore = 0;
     }
 
+    private void ExitProgramm() => Application.Quit();
 
 }
