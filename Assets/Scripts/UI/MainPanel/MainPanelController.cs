@@ -8,6 +8,8 @@ public class MainPanelController
     private bool _cof=false;
     private float _result = 0f;
 
+    private ActionNum _typTask= ActionNum.Subtraction;
+
     private SOData _sOData;
     private MainView _mainView;
 
@@ -54,6 +56,7 @@ public class MainPanelController
                     _mainView.MainPanelView.TasckText.text = $"{num1}-{num2}=";
                     _result = num1 - num2;
                     _cof = false;
+                    _typTask = ActionNum.Subtraction;
                 }
             break;
             case ActionNum.Addition: 
@@ -61,6 +64,7 @@ public class MainPanelController
                     _mainView.MainPanelView.TasckText.text = $"{num1}+{num2}=";
                     _result = num1 + num2;
                     _cof = false;
+                    _typTask = ActionNum.Addition;
                 }
             break;
             case ActionNum.Multiplication: 
@@ -68,6 +72,7 @@ public class MainPanelController
                     _mainView.MainPanelView.TasckText.text = $"{num1}*{num2}=";
                     _result = num1 * num2;
                     _cof = true;
+                    _typTask = ActionNum.Multiplication;
                 }
             break;
             case ActionNum.Division: 
@@ -86,6 +91,7 @@ public class MainPanelController
                     {
                         CreatExample();
                     }
+                    _typTask = ActionNum.Division;
                 }
             break;
         }
@@ -98,11 +104,13 @@ public class MainPanelController
         {
             AddScore();
             SetImageTrue();
+            AddStatistics(true);
         }
         else
         {
             RemovScore();
             SetImageFalse();
+            AddStatistics(false);
         }
         PlayerPrefs.SetInt("LocalScore", _sOData.LocalScore);
         PlayerPrefs.SetInt("Score", _sOData.Score);
@@ -136,5 +144,67 @@ public class MainPanelController
     {
         _mainView.MainPanelView.TrueImage.gameObject.SetActive(false);
         _mainView.MainPanelView.FalseImage.gameObject.SetActive(true);
+    }
+    private void AddStatistics(bool answer)
+    {
+        switch (_typTask)
+        {
+            case ActionNum.Subtraction:
+                {
+                    if(answer)
+                    {
+                        int Subtraction = PlayerPrefs.GetInt("SubtractionTrueStatistics");
+                        PlayerPrefs.SetInt("SubtractionTrueStatistics", ++Subtraction);
+                    }
+                    else 
+                    {
+                        int Subtraction = PlayerPrefs.GetInt("SubtractionFalseStatistics");
+                        PlayerPrefs.SetInt("SubtractionFalseStatistics", ++Subtraction);
+                    }
+                }
+                break;
+            case ActionNum.Addition: 
+                {
+                    if (answer)
+                    {
+                        int Subtraction = PlayerPrefs.GetInt("AdditionTrueStatistics");
+                        PlayerPrefs.SetInt("AdditionTrueStatistics", ++Subtraction);
+                    }
+                    else
+                    {
+                        int Subtraction = PlayerPrefs.GetInt("AdditionFalseStatistics");
+                        PlayerPrefs.SetInt("AdditionFalseStatistics", ++Subtraction);
+                    }
+                }
+                break;
+            case ActionNum.Multiplication: 
+                {
+                    if (answer)
+                    {
+                        int Subtraction = PlayerPrefs.GetInt("MultiplicationTrueStatistics");
+                        PlayerPrefs.SetInt("MultiplicationTrueStatistics", ++Subtraction);
+                    }
+                    else
+                    {
+                        int Subtraction = PlayerPrefs.GetInt("MultiplicationFalseStatistics");
+                        PlayerPrefs.SetInt("MultiplicationFalseStatistics", ++Subtraction);
+                    }
+                }
+                break;
+            case ActionNum.Division: 
+                {
+                    if (answer)
+                    {
+                        int Subtraction = PlayerPrefs.GetInt("DivisionTrueStatistics");
+                        PlayerPrefs.SetInt("DivisionTrueStatistics", ++Subtraction);
+                    }
+                    else
+                    {
+                        int Subtraction = PlayerPrefs.GetInt("DivisionFalseStatistics");
+                        PlayerPrefs.SetInt("DivisionFalseStatistics", ++Subtraction);
+                    }
+                }
+                break;
+        }
     }
 }

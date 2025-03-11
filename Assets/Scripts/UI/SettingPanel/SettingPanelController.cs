@@ -7,6 +7,7 @@ public class SettingPanelController
 
     private SOData _sOData;
     private MainView _mainView;
+    private StatisticsPanelController _statisticsPanelController;
     public SettingPanelController(MainView mainView)
     {
         _mainView = mainView;
@@ -15,6 +16,9 @@ public class SettingPanelController
         mainView.SettingPanelView.BeackNumButton.onClick.AddListener(ReduceNum);
         mainView.SettingPanelView.ResetButton.onClick.AddListener(ResetLocalScore);
         mainView.SettingPanelView.ExitButton.onClick.AddListener(ExitProgramm);
+        mainView.SettingPanelView.StatisticsButton.onClick.AddListener(OpenPanelStatistics);
+
+        _statisticsPanelController = new StatisticsPanelController(mainView.SettingPanelView, mainView.SOData);
 
         _sOData = mainView.SOData;
         SetToggle();
@@ -97,6 +101,12 @@ public class SettingPanelController
     {
         _sOData.LocalScore = 0;
         PlayerPrefs.SetInt("LocalScore", 0);
+    }
+
+    private void OpenPanelStatistics()
+    { 
+        _mainView.SettingPanelView.StatisticsPanelView.gameObject.SetActive(true);
+        _mainView.SettingPanelView.OpenStatisticsInvoke();
     }
 
     private void ExitProgramm() => Application.Quit();

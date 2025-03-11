@@ -10,6 +10,7 @@ public class SettingPanelView : MonoBehaviour
 
     public Button BeackButton;
     public Button ResetButton;
+    public Button StatisticsButton;
     public Button BeackNumButton;
     public Button NextNumButton;
     public Button ExitButton;
@@ -20,4 +21,10 @@ public class SettingPanelView : MonoBehaviour
     public Toggle DivisionToggle;
 
     public GameObject SettingPanel;
+    public StatisticsPanelView StatisticsPanelView;
+
+    public delegate void OpenPanelStatistics();
+    public event OpenPanelStatistics OpenStatistics;
+
+    public void OpenStatisticsInvoke() => OpenStatistics?.Invoke();
 }

@@ -17,4 +17,6 @@ public class SOData : ScriptableObject
     public bool Addition = false;
     public bool Multiplication = false;
     public bool Division = false;
+
+    public bool FirstStart = true;
 }
