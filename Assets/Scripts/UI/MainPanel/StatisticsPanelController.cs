@@ -8,7 +8,6 @@ public class StatisticsPanelController
     public StatisticsPanelController(SettingPanelView settingPanelView, SOData sOData)
     {
         _settingPanelView = settingPanelView;
-        if (sOData.FirstStart) { ResetStatistics(); }
         _settingPanelView.StatisticsPanelView.BeackButton.onClick.AddListener(BeackToPanelSettings);
         _settingPanelView.StatisticsPanelView.ResetButton.onClick.AddListener(ResetStatistics);
         _settingPanelView.OpenStatistics += ShowDataStatistics;

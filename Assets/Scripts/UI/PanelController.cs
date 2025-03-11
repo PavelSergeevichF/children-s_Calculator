@@ -23,18 +23,6 @@ public class PanelController : IExecute
 
         _mainPanelController = new MainPanelController(mainView);
         _settingPanelController = new SettingPanelController(mainView);
-
-        if (PlayerPrefs.GetInt("FirstStart") != 10)
-        {
-            _sOData.FirstStart = true;
-            _sOData.Score = 0;
-            _sOData.LocalScore = 0;
-            PlayerPrefs.SetInt("FirstStart", 10);
-        }
-        else
-        {
-            _sOData.FirstStart = false;
-        }
     }
     public void Execute()
     {
