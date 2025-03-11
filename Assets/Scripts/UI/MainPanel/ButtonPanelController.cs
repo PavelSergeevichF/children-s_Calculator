@@ -47,7 +47,7 @@ public class ButtonPanelController
     { 
         if(_mainPanelController.AnswerStr.Length>0)
         {
-            if (_mainPanelController.AnswerStr[_mainPanelController.AnswerStr.Length - 1] == '.')
+            if (_mainPanelController.AnswerStr[_mainPanelController.AnswerStr.Length - 1] == ',')
             {
                 ResetPoint();
             }
