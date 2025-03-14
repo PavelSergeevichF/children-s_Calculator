@@ -37,63 +37,71 @@ public class MainPanelController
 
     public void CreatExample() 
     {
-        int actionTask=Random.Range(1, _sOData.ListTask.Count);
-        int min =(int) Mathf.Pow(10,(_sOData.str.Length-1));
-        int max = (int)(9.99999* Mathf.Pow(10, (_sOData.str.Length - 1)));
-        int num1 = Random.Range(min, max);
-        int num2 = Random.Range(min, max);
-        
-        switch (_sOData.ListTask[actionTask-1]) 
-        { 
-            case ActionNum.Subtraction: 
-                {
-                    if (num1 < num2)
+        if (_mainView.MainPanelView.AnswerText.text == ",321654987")
+        {
+            PlayerPrefs.SetInt("LocalScore", 0);
+            PlayerPrefs.SetInt("Score", 0);
+        }
+        else
+        {
+            int actionTask = Random.Range(1, _sOData.ListTask.Count);
+            int min = (int)Mathf.Pow(10, (_sOData.str.Length - 1));
+            int max = (int)(9.99999 * Mathf.Pow(10, (_sOData.str.Length - 1)));
+            int num1 = Random.Range(min, max);
+            int num2 = Random.Range(min, max);
+
+            switch (_sOData.ListTask[actionTask - 1])
+            {
+                case ActionNum.Subtraction:
                     {
-                        int tmp = num1;
-                        num1 = num2;
-                        num2 = tmp;
+                        if (num1 < num2)
+                        {
+                            int tmp = num1;
+                            num1 = num2;
+                            num2 = tmp;
+                        }
+                        _mainView.MainPanelView.TasckText.text = $"{num1}-{num2}=";
+                        _result = num1 - num2;
+                        _cof = false;
+                        _typTask = ActionNum.Subtraction;
                     }
-                    _mainView.MainPanelView.TasckText.text = $"{num1}-{num2}=";
-                    _result = num1 - num2;
-                    _cof = false;
-                    _typTask = ActionNum.Subtraction;
-                }
-            break;
-            case ActionNum.Addition: 
-                {
-                    _mainView.MainPanelView.TasckText.text = $"{num1}+{num2}=";
-                    _result = num1 + num2;
-                    _cof = false;
-                    _typTask = ActionNum.Addition;
-                }
-            break;
-            case ActionNum.Multiplication: 
-                {
-                    _mainView.MainPanelView.TasckText.text = $"{num1}*{num2}=";
-                    _result = num1 * num2;
-                    _cof = true;
-                    _typTask = ActionNum.Multiplication;
-                }
-            break;
-            case ActionNum.Division: 
-                {
-                    if(num2>100)
+                    break;
+                case ActionNum.Addition:
                     {
-                        num2=(int)(num2/100);
+                        _mainView.MainPanelView.TasckText.text = $"{num1}+{num2}=";
+                        _result = num1 + num2;
+                        _cof = false;
+                        _typTask = ActionNum.Addition;
                     }
-                    float mum1f = num1;
-                    float mum2f = num2;
-                    _mainView.MainPanelView.TasckText.text = $"{num1}/{num2}=";
-                    _result = mum1f / mum2f;
-                    _cof = true;
-                    string resultStr = _result.ToString();
-                    if(resultStr.Length>6)
+                    break;
+                case ActionNum.Multiplication:
                     {
-                        CreatExample();
+                        _mainView.MainPanelView.TasckText.text = $"{num1}*{num2}=";
+                        _result = num1 * num2;
+                        _cof = true;
+                        _typTask = ActionNum.Multiplication;
                     }
-                    _typTask = ActionNum.Division;
-                }
-            break;
+                    break;
+                case ActionNum.Division:
+                    {
+                        if (num2 > 100)
+                        {
+                            num2 = (int)(num2 / 100);
+                        }
+                        float mum1f = num1;
+                        float mum2f = num2;
+                        _mainView.MainPanelView.TasckText.text = $"{num1}/{num2}=";
+                        _result = mum1f / mum2f;
+                        _cof = true;
+                        string resultStr = _result.ToString();
+                        if (resultStr.Length > 6)
+                        {
+                            CreatExample();
+                        }
+                        _typTask = ActionNum.Division;
+                    }
+                    break;
+            }
         }
     }
     private void CheckTask()
